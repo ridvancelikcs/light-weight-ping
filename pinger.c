@@ -21,7 +21,7 @@ typedef struct ping_pckt_send
 
 typedef struct ping_pckt_recv
 {
-	struct iphdr	ip_hdr;
+	struct iphdr	ip_hdr;										// Kernel adds an extra iphdr into received packet
 	struct icmphdr	icmp_hdr;
 	char			msg[BUF_SIZE - sizeof(struct icmphdr)];
 } r_ping_pckt_t;
