@@ -9,21 +9,21 @@
 #include <time.h>
 #include <fcntl.h>
 
-#define PING_PKT_SIZE	64
+#define BUF_SIZE		64
 #define RECV_TIMEOUT	1                                                          // timeout value for SO_RCVTIMEO in sec
 #define ECHO_MESSAGE	"This is your captain speaking.	Give me a nice echo dude"  // 56 bytes with null terminator
 
 typedef struct ping_pckt_send
 {
 	struct icmphdr	icmp_hdr;
-	char			msg[PING_PKT_SIZE - sizeof(struct icmphdr)];
+	char			msg[BUF_SIZE - sizeof(struct icmphdr)];
 } x_ping_pckt_t;
 
 typedef struct ping_pckt_recv
 {
 	struct iphdr	ip_hdr;
 	struct icmphdr	icmp_hdr;
-	char			msg[PING_PKT_SIZE - sizeof(struct icmphdr)];
+	char			msg[BUF_SIZE - sizeof(struct icmphdr)];
 } r_ping_pckt_t;
 
 unsigned short csum(unsigned short *buf, int nwords)
