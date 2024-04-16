@@ -13,14 +13,12 @@
 #define RECV_TIMEOUT	1                                                          // timeout value for SO_RCVTIMEO in sec
 #define ECHO_MESSAGE	"This is your captain speaking.	Give me a nice echo dude"  // 56 bytes with null terminator
 
-typedef struct ping_pckt_send
-{
+typedef struct ping_pckt_send {
 	struct icmphdr	icmp_hdr;
 	char			msg[BUF_SIZE - sizeof(struct icmphdr)];
 } x_ping_pckt_t;
 
-typedef struct ping_pckt_recv
-{
+typedef struct ping_pckt_recv {
 	struct iphdr	ip_hdr;										// Kernel adds an extra iphdr into received packet
 	struct icmphdr	icmp_hdr;
 	char			msg[BUF_SIZE - sizeof(struct icmphdr)];
@@ -121,6 +119,7 @@ int send_ping(char *ip)
 		close(ping_sock_fd);
 		return (0);
 	}
+	
 	printf("%d bytes form %s msg_seq=%d ttl=%d time=%f usec.\n", recv_ret, ip, msg_count, ttl_val, elapsed_in_usec);
 	close(ping_sock_fd);
 	return (int)elapsed_in_usec;
